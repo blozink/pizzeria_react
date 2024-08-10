@@ -28,7 +28,10 @@ const Navegacion = () => {
             ) : (
               <>
                 <Button variant="outline-light" style={{ margin: '5px' }}>🔐 Login</Button>
-                <Button variant="outline-light" style={{ margin: '5px' }}>🔐 Register</Button>
+                <Button variant="outline-light" style={{ margin: '5px' }}>
+                  <a href="./components/Register.jsx"></a>
+                  
+                  🔐 Register</Button>
               </>
             )}
           </Nav>
