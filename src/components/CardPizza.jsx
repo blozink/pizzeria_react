@@ -32,4 +32,4 @@ const CardPizza = ({ name, price, ingredients, img }) => {
   );
 };
 
-export default CardPizza;
+export default CardPizza
