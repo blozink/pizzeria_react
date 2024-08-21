@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+
 const CardPizza = ({ name, price, ingredients, img }) => {
   return (
     <Card style={{ width: '22rem', margin: '1rem' }}>
