@@ -1,22 +1,26 @@
-import './App.css'
+import './App.css';
 import Navegacion from './components/Navbar';
-import Home from './components/Home';
+//import Home from './components/Home';
 import Footer from './components/Footer';
-import Cart from './components/Cart';
-//import Register from './components/Register';
-//import Login from './components/Login';
+import Pizza from './components/Pizza';
+// import Register from './components/Register';
+// import Login from './components/Login';
 
-function App() {
+
+const App = () => {
   return (
-    <>
-      <Navegacion/>
-     {/*<Register/> */}
-     {/*<Login/> */} 
-      {/*<Home/>*/}
-      <Cart/>
-      <Footer/>
-    </>
-  )
-}
+    <div className="d-flex flex-column min-vh-100">
+      <Navegacion />
+      <div className="flex-grow-1">
+        {/* <Register /> */}
+        {/* <Login /> */}
+        {/*<Home />*/}
+        {/*<Cart />*/}
+      <Pizza/>
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
-export default App
+export default App;
