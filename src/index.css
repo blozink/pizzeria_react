@@ -131,13 +131,14 @@ button:focus-visible {
 }
 
 .footer {
-  background-color: #242424;
+  background-color: #2b3035;
   color: white;
   text-align: center;
   padding: 1rem 0;
   bottom: 0;
   width: 100%;
   font-size: 0.9rem;
+  Height: '9vh' ;
 }
 .App {
   width: 100%;

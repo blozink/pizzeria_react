@@ -1,11 +1,12 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
+import React from "react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 const formatCurrency = (amount) => {
-  return amount.toLocaleString('es-ES');
+  return amount.toLocaleString("es-ES");
 };
 
 const Navegacion = () => {
@@ -13,30 +14,58 @@ const Navegacion = () => {
   const token = false;
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" style={{ width: '100%' }} variant="dark" bg='dark' data-bs-theme="dark">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      className="bg-body-tertiary"
+      style={{ width: "100%" }}
+      variant="dark"
+      bg="dark"
+      data-bs-theme="dark"
+    >
       <Container fluid>
-        <Navbar.Brand href="#home">Pizzería Mamma Mia!</Navbar.Brand>
+        <Navbar.Brand>Pizzería Mamma Mia!</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Button variant="outline-light" style={{ margin: '5px' }}>🍕 Home</Button>
+            <Link to="/">
+              <Button variant="outline-light" style={{ margin: "5px" }}>
+                🍕 Home
+              </Button>
+            </Link>
             {token ? (
               <>
-                <Button variant="outline-light" style={{ margin: '5px' }}>🔓 Profile</Button>
-                <Button variant="outline-light" style={{ margin: '5px' }}>🔒 Logout</Button>
+                <Link to="/profile">
+                  <Button variant="outline-light" style={{ margin: "5px" }}>
+                    🔓 Profile
+                  </Button>
+                </Link>
+
+                <Button variant="outline-light" style={{ margin: "5px" }}>
+                  🔒 Logout
+                </Button>
               </>
             ) : (
               <>
-                <Button variant="outline-light" style={{ margin: '5px' }}>🔐 Login</Button>
-                <Button variant="outline-light" style={{ margin: '5px' }}>
-                  <a href="./components/Register.jsx"></a>
-                  
-                  🔐 Register</Button>
+                <Link to="/login">
+                  <Button variant="outline-light" style={{ margin: "5px" }}>
+                    🔐 Login
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button variant="outline-light" style={{ margin: "5px" }}>
+                    🔐 Register
+                  </Button>
+                </Link>
               </>
             )}
           </Nav>
           <Nav>
-            <Button variant="outline-info" style={{ margin: '5px' }}>🛒 Total: ${formatCurrency(total)}</Button>
+            <Link to="/cart">
+              <Button variant="outline-info" style={{ margin: "5px" }}>
+                🛒 Total: ${formatCurrency(total)}
+              </Button>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
