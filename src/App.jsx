@@ -9,10 +9,12 @@ import Cart from "./pages/Cart";
 import Pizza from "./pages/Pizza";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import CartProvider from "./context/CartContext";
 
 const App = () => {
   return (
-    <div className="d-flex flex-column min-vh-100">
+    <CartProvider>
+          <div className="d-flex flex-column min-vh-100">
       <Navegacion />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,6 +27,8 @@ const App = () => {
       </Routes>
       <Footer /> 
     </div>
+    </CartProvider>
+
   );
 };
 

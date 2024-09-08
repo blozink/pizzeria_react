@@ -1,28 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const formatCurrency = (amount) => {
   return amount.toLocaleString("es-ES");
 };
 
 const Navegacion = () => {
-  const total = 25000;
+  const { calculateTotal } = useContext(CartContext);
+  const total = calculateTotal();
   const token = false;
 
   return (
-    <Navbar
-      collapseOnSelect
-      expand="lg"
-      className="bg-body-tertiary"
-      style={{ width: "100%" }}
-      variant="dark"
-      bg="dark"
-      data-bs-theme="dark"
-    >
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" style={{ width: "100%" }} variant="dark" bg="dark"  data-bs-theme="dark">
       <Container fluid>
         <Navbar.Brand>Pizzería Mamma Mia!</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -40,7 +34,6 @@ const Navegacion = () => {
                     🔓 Profile
                   </Button>
                 </Link>
-
                 <Button variant="outline-light" style={{ margin: "5px" }}>
                   🔒 Logout
                 </Button>

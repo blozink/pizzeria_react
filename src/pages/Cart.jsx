@@ -1,40 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-import pizzas from '../assets/js/pizzas';
+import { CartContext } from '../context/CartContext';
 
 const Cart = () => {
-  const [cart, setCart] = useState([
-    { ...pizzas[0], quantity: 1 },
-    { ...pizzas[1], quantity: 2 },
-  ]);
-
-  const handleAddPizza = (id) => {
-    const newCart = cart.map(pizza => {
-      if (pizza.id === id) {
-        return { ...pizza, quantity: pizza.quantity + 1 };
-      }
-      return pizza;
-    });
-    setCart(newCart);
-  };
-
-  const handleReducePizza = (id) => {
-    const newCart = cart
-      .map(pizza => {
-        if (pizza.id === id && pizza.quantity > 1) {
-          return { ...pizza, quantity: pizza.quantity - 1 };
-        }
-        return pizza;
-      })
-      .filter(pizza => pizza.quantity > 0);
-    setCart(newCart);
-  };
-
-  const calculateTotal = () => {
-    return cart.reduce((total, pizza) => total + pizza.price * pizza.quantity, 0);
-  };
+  const { cart, addToCart, removeFromCart, deleteFromCart, calculateTotal } = useContext(CartContext);
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -48,7 +19,7 @@ const Cart = () => {
                   <Card.Title className='card-title'><strong>{pizza.name}</strong></Card.Title>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                <Card.Text className='card-text'>🍕 {pizza.ingredients.join(', ')}</Card.Text>
+                  <Card.Text className='card-text'>🍕 {pizza.ingredients.join(', ')}</Card.Text>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Card.Text className='card-text'>Cantidad: {pizza.quantity}</Card.Text>
@@ -65,8 +36,9 @@ const Cart = () => {
                 </ListGroup.Item>
               </ListGroup>
               <div className="button-group">
-                <Button variant="outline-danger" className="card-button" onClick={() => handleReducePizza(pizza.id)}>-</Button>
-                <Button variant="outline-success" className="card-button" onClick={() => handleAddPizza(pizza.id)}>+</Button>
+                <Button variant="outline-danger" className="card-button" onClick={() => removeFromCart(pizza.id)}>-</Button>
+                <Button variant="outline-success" className="card-button" onClick={() => addToCart(pizza)}>+</Button>
+                <Button variant="danger" className="card-button" onClick={() => deleteFromCart(pizza.id)}>Eliminar</Button>
               </div>
             </Card.Body>
           </Card>
