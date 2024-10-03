@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
+import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -10,10 +12,14 @@ function Login() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
+
 
     if (!email || !password) {
       setError('Todos los campos son obligatorios');
@@ -24,8 +30,14 @@ function Login() {
       setError('La contraseña debe tener al menos 6 caracteres');
       return;
     }
-    
-    setSuccess('Inicio de sesión exitoso');
+
+    if (email === 'test@test.com' && password === '123123') {
+      login('fakeToken');
+      setSuccess('Inicio de sesión exitoso');
+      navigate('/profile');
+    } else {
+      setError('Credenciales incorrectas');
+    }
   };
 
   return (

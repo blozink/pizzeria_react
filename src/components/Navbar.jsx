@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 const formatCurrency = (amount) => {
   return amount.toLocaleString("es-ES");
@@ -12,8 +13,8 @@ const formatCurrency = (amount) => {
 
 const Navegacion = () => {
   const { calculateTotal } = useContext(CartContext);
+  const { token, logout } = useContext(UserContext);
   const total = calculateTotal();
-  const token = false;
 
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" style={{ width: "100%" }} variant="dark" bg="dark"  data-bs-theme="dark">
@@ -34,7 +35,7 @@ const Navegacion = () => {
                     🔓 Profile
                   </Button>
                 </Link>
-                <Button variant="outline-light" style={{ margin: "5px" }}>
+                <Button variant="outline-light" style={{ margin: "5px" }} onClick={logout}>
                   🔒 Logout
                 </Button>
               </>

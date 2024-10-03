@@ -3,9 +3,11 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { CartContext } from '../context/CartContext';
+import { UserContext } from '../context/UserContext';
 
 const Cart = () => {
   const { cart, addToCart, removeFromCart, deleteFromCart, calculateTotal } = useContext(CartContext);
+  const { token } = useContext(UserContext);
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -47,7 +49,13 @@ const Cart = () => {
       
       <div style={{ textAlign: 'center', marginTop: '2rem' }}>
         <h3>Total de la compra: ${calculateTotal().toLocaleString('es-ES')}</h3>
-        <Button variant="success" style={{ marginTop: '1rem' }}>Pagar</Button>
+        <Button 
+          variant="success" 
+          style={{ marginTop: '1rem' }} 
+          disabled={!token}
+        >
+          {token ? 'Pagar' : 'Inicia sesión para pagar'}
+        </Button>
       </div>
     </div>
   );

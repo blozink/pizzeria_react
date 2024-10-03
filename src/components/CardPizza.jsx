@@ -2,8 +2,9 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Link } from 'react-router-dom';
 
-const CardPizza = ({ name, price, ingredients, img, onAdd }) => {
+const CardPizza = ({ id, name, price, ingredients, img, onAdd }) => {
   return (
     <Card style={{ width: '22rem', margin: '1rem' }}>
       <Card.Img src={img} width={"100%"} />
@@ -24,7 +25,9 @@ const CardPizza = ({ name, price, ingredients, img, onAdd }) => {
         </ListGroup>
 
         <div className="button-group">
-          <Button variant="outline-dark" className="card-button">Ver Más 👀</Button>
+          <Link to={`/pizza/${id}`}>
+            <Button variant="outline-dark" className="card-button">Ver Más 👀</Button>
+          </Link>
           <Button variant="dark" className="card-button" onClick={onAdd}>Añadir 🛒</Button>
         </div>
       </Card.Body>

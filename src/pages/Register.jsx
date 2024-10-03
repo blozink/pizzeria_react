@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,8 +32,10 @@ function Register() {
       setError('Las contraseñas no coinciden');
       return;
     }
-
     setSuccess('Registro exitoso');
+    setTimeout(() => {
+      navigate('/');
+    }, 1500);
   };
 
   return (
