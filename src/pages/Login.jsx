@@ -15,11 +15,10 @@ function Login() {
   const { login } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
-
 
     if (!email || !password) {
       setError('Todos los campos son obligatorios');
@@ -31,12 +30,12 @@ function Login() {
       return;
     }
 
-    if (email === 'test@test.com' && password === '123123') {
-      login('fakeToken');
+    try {
+      await login(email, password);
       setSuccess('Inicio de sesión exitoso');
-      navigate('/profile');
-    } else {
-      setError('Credenciales incorrectas');
+      navigate('/profile'); 
+    } catch (err) {
+      setError('Error al iniciar sesión');
     }
   };
 

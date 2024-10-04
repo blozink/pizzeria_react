@@ -4,10 +4,35 @@ import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { CartContext } from '../context/CartContext';
 import { UserContext } from '../context/UserContext';
+import axios from 'axios';
 
 const Cart = () => {
   const { cart, addToCart, removeFromCart, deleteFromCart, calculateTotal } = useContext(CartContext);
   const { token } = useContext(UserContext);
+
+  const handleCheckout = async () => {
+    if (!token) {
+      alert('Necesitas iniciar sesión para pagar.');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/checkouts', {
+        cart,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        alert('Compra realizada con éxito');
+      }
+    } catch (error) {
+      console.error('Error en el checkout:', error);
+      alert('Error al procesar el pago. Inténtalo nuevamente.');
+    }
+  };
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -53,6 +78,7 @@ const Cart = () => {
           variant="success" 
           style={{ marginTop: '1rem' }} 
           disabled={!token}
+          onClick={handleCheckout}
         >
           {token ? 'Pagar' : 'Inicia sesión para pagar'}
         </Button>

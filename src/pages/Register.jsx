@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
+import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -11,9 +12,10 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const { register } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
@@ -32,10 +34,16 @@ function Register() {
       setError('Las contraseñas no coinciden');
       return;
     }
-    setSuccess('Registro exitoso');
-    setTimeout(() => {
-      navigate('/');
-    }, 1500);
+
+    try {
+      await register(email, password);
+      setSuccess('Registro exitoso');
+      setTimeout(() => {
+        navigate('/profile');
+      }, 1500);
+    } catch (err) {
+      setError('Error durante el registro o el usuario ya existe');
+    }
   };
 
   return (
